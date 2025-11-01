@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>17° Feria del Libro Catamarca 2025</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="/">Feria del Libro Catamarca</a>
+      <nav class="main-nav">
+        <a href="#programa">Programa</a>
+        <a href="#destacados">Destacados</a>
+        <a href="#info">Información</a>
+      </nav>
+    </div>
+    <div class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content container">
+        <div class="hero-text">
+          <h1 class="hero-title">LOS LIBROS,<br><span class="hero-accent">PORTALES INFINITOS</span></h1>
+          <p class="hero-sub">17° Feria del Libro de Catamarca — 6 a 9 de noviembre de 2025</p>
+          <a class="btn primary" href="#programa">Ver programación</a>
+        </div>
+        <div class="hero-media" aria-hidden="true">
+          <img id="hero-img" src="assets/posters/placeholder-hero.jpg" alt="Póster Feria del Libro Catamarca 2025">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="destacados" class="section">
+      <h2>Actividades destacadas</h2>
+      <div class="cards-grid" id="cards-grid">
+        <!-- Event cards: serán inyectadas por JS o puedes pegarlas estáticas -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <small>Organiza: Gobierno de Catamarca · Ministerio de Cultura, Turismo y Deportes</small>
+  </footer>
+
+  <script>
+  // Si preferís inyectar desde data/eventos.json, aquí tienes un pequeño helper:
+  fetch('data/eventos.json')
+    .then(r => r.json())
+    .then(events => {
+      const grid = document.getElementById('cards-grid');
+      const destacados = events.filter(e => e.destacado).slice(0,5);
+      destacados.forEach(e => {
+        const card = document.createElement('article');
+        card.className = 'event-card';
+        card.innerHTML = `
+          <figure class="thumb"><img loading="lazy" src="${e.photo_filename || e.flyer_filename || 'assets/posters/placeholder-thumb.jpg'}" alt="${e.titulo}"></figure>
+          <div class="meta"><time datetime="${e.fecha}">${new Date(e.fecha).toLocaleDateString('es-AR',{day:'numeric', month:'short'})} · ${e.hora_inicio}</time><span class="space">${e.espacio}</span></div>
+          <h3 class="title">${e.titulo}</h3>
+          <p class="excerpt">${(e.descripcion_larga || '').slice(0,140)}${(e.descripcion_larga && e.descripcion_larga.length>140)?'…':''}</p>
+          <div class="tags">${(e.etiquetas||'').replace(/;/g,' · ')}</div>
+        `;
+        grid.appendChild(card);
+      });
+    })
+    .catch(()=>{ /* fallback: podés insertar cards estáticas */ });
+  </script>
+</body>
+</html>
