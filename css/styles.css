@@ -1,0 +1,49 @@
+:root{
+  --color-primary:#6A2C9E;
+  --color-accent:#FF7A18;
+  --color-dark:#1E2340;
+  --color-muted:#F4F4F6;
+  --color-paper:#FFF7F0;
+  --gap:16px;
+  --radius:8px;
+  --ff-ui:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --ff-display:'Playfair Display',serif;
+}
+*{box-sizing:border-box}
+body{font-family:var(--ff-ui);color:var(--color-dark);background:var(--color-muted);margin:0;line-height:1.45}
+.container{max-width:1100px;margin:0 auto;padding:0 16px}
+
+/* Header */
+.header-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+.brand{font-family:var(--ff-display);font-size:20px;color:var(--color-paper);text-decoration:none;background:linear-gradient(90deg,var(--color-primary),#4b1f7a);padding:6px 10px;border-radius:6px}
+.main-nav a{color:var(--color-dark);margin-left:18px;text-decoration:none;font-weight:600}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(0,0,0,0.04)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg, rgba(30,35,64,0.55), rgba(106,44,158,0.35));pointer-events:none}
+.hero-content{display:flex;gap:24px;align-items:center;padding:48px 16px}
+.hero-text{color:#fff;max-width:640px;z-index:2}
+.hero-title{font-family:var(--ff-display);font-size:44px;line-height:1; margin:0 0 8px}
+.hero-accent{color:var(--color-accent)}
+.hero-sub{color:rgba(255,255,255,0.9);margin:8px 0 16px}
+.btn{display:inline-block;padding:10px 16px;border-radius:6px;text-decoration:none;font-weight:600}
+.btn.primary{background:var(--color-accent);color:#fff}
+
+/* Hero media */
+.hero-media img{width:320px;max-width:35vw;height:auto;border-radius:8px;box-shadow:0 10px 30px rgba(10,12,30,0.15)}
+
+/* Cards grid */
+.section{padding:28px 0}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:12px}
+.event-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 6px 18px rgba(18,22,60,0.06);padding:12px}
+.event-card .thumb img{width:100%;height:160px;object-fit:cover;display:block;border-radius:6px}
+.event-card .meta{font-size:13px;color:#666;margin-top:8px;display:flex;justify-content:space-between;gap:8px}
+.event-card .title{font-size:16px;margin:8px 0 6px;color:var(--color-dark);font-weight:700}
+.event-card .excerpt{font-size:14px;color:#444}
+.tags{font-size:12px;color:#777;margin-top:10px}
+
+/* Responsive */
+@media (max-width:900px){
+  .hero-content{flex-direction:column;text-align:center}
+  .hero-media img{max-width:70vw}
+}
